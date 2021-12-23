@@ -21,10 +21,10 @@ Changed retieval date of database to 1946
 Tried to see how to search MeSH terms.
 
 22/12/2021
-Installed TensorFlow
-Created vocabulary using Keras API
-Created training data
-Trained word2vec model; 10 Epochs with 98% accuracy - 785m using Macbook M1
+- Installed TensorFlow
+- Created vocabulary using Keras API
+- Created training data
+- Trained word2vec model; 10 Epochs with 98% accuracy - 785m using Macbook M1
 
 23/12/21
-Uploaded vectors.tsv into Embeddings Projector.
+- Uploaded vectors.tsv into Embeddings Projector.
