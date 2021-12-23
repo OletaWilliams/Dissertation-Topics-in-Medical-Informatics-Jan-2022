@@ -1,0 +1,89 @@
+
+```{r}
+install.packages("easyPubMed")
+```
+
+```{r}
+library(RISmed)
+```
+
+```{r}
+search_query6 <- EUtilsSummary("Medical Informatics Data Management", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=1946, maxdate=2021)
+summary(search_query6)
+```
+
+```{r}
+library(easyPubMed)
+```
+
+```{r}
+#Query 1
+#Pubmed queried using get_pubmed_ids() - query string as argument
+#PubMed records retrieved in Abstract format
+query_1 <- 'Medical Informatics[AB] AND Medical Informatics[TI] "2011"[PDAT] : "2021"[PDAT]' #Can build more complex queries than in RISmed
+query1_id <- get_pubmed_ids(query_1)
+query1_abstracts_txt <- fetch_pubmed_data(query1_id, format = "abstract")
+head(query1_abstracts_txt)
+```
+
+```{r}
+#Query 2 - Building on the last query
+#Using field tags for specificity
+query_2 <- 'Medical Informatics[TIAB] AND Data Management[TIAB] AND "2011"[PDAT] : "2021"[PDAT]'
+query2_id <- get_pubmed_ids(query_2)
+query2_abstracts_txt <- fetch_pubmed_data(query2_id, format = "abstract")
+head(query2_abstracts_txt)
+```
+
+```{r}
+#Query3 - Changing dates; beginning of database record 1946
+#Adds a little more records +514
+query_3 <- 'Medical Informatics[TIAB] AND Data Management[TIAB] AND "1946"[PDAT] : "2021"[PDAT]'
+query3_id <- get_pubmed_ids(query_3)
+query3_abstracts_txt <- fetch_pubmed_data(query3_id, format = "abstract")
+head(query3_abstracts_txt)
+```
+
+```{r}
+#Query4 - Can I add MeSH terms?
+query_4 <- 'Medical Informatics[MH] AND Medical Informatics[TIAB] AND Data Management[MH] AND Data Management[TIAB] AND "1946"[PDAT] : "2021"[PDAT]'
+query4_id <- get_pubmed_ids(query_4)
+query4_abstracts_txt <- fetch_pubmed_data(query4_id, format = "abstract")
+head(query4_abstracts_txt)
+```
+
+```{r}
+#Can I even search MeSH?
+#Can search MeSH separately, but struggles to search when combined into complex query.
+#Will need to merge data - ask Tinashe for help.
+query_5 <- 'Medical Informatics[MH] AND Data Management[MH] AND "1946"[PDAT] : "2021"[PDAT]'
+query5_id <- get_pubmed_ids(query_5)
+query5_abstracts_txt <- fetch_pubmed_data(query5_id, format = "abstract")
+head(query5_abstracts_txt)
+```
+
+```{r}
+#extracting titles
+#displaying as dataframe
+my_abstracts_xml <- fetch_pubmed_data(pubmed_id_list = query3_id)
+class(my_abstracts_xml)
+my_titles <- custom_grep(my_abstracts_xml, "ArticleTitle", "char")
+TTM <- nchar(my_titles) > 75 #using gsub to remove tags and trim title length
+my_titles[TTM] <- paste(substr(my_titles[TTM], 1, 70), "...", sep = "") #trimming title length
+head(my_titles)
+```
+
+```{r}
+length(query3_abstracts_txt)
+```
+```{r}
+#Downloading abstracts into txt file
+ out.A <- batch_pubmed_download(pubmed_query_string = query3_abstracts_txt, 
+                               format = "xml", 
+                               batch_size = 20,
+                               dest_file_prefix = "easyPM_example",
+                               encoding = "ASCII")
+```
+
+
+

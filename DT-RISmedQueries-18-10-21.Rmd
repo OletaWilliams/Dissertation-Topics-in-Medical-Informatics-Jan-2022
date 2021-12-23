@@ -1,0 +1,27 @@
+install.packages("RISmed")
+library(RISmed)
+search_query <- EUtilsSummary("LIMS", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query)
+
+search_query2 <- EUtilsSummary("Laboratory Information Management Systems", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query2)
+
+search_query3 <- EUtilsSummary("Health Information Systems", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query3)
+
+search_query4 <- EUtilsSummary("Clinical Laboratory Information Systems", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query4)
+
+search_query5 <- EUtilsSummary("Medical Informatics Data Management", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query5)
+
+search_query6 <- EUtilsSummary("Medical Informatics Data Management", type="esearch", db="pubmed", datetype="pdat", retmax=100, mindate=2000, maxdate=2021)
+summary(search_query6)
+
+search_query7 <- EUtilsSummary(("medical informatics"[MeSH Terms] OR ("medical"[All Fields] AND "informatics"[All Fields]) OR "medical informatics"[All Fields]) AND ("data management"[MeSH Terms] OR ("data"[All Fields] AND "management"[All Fields]) OR "data management"[All Fields])) AND 2000[PDAT] : 2021[PDAT]
+summary(search_query7)
+
+search_query8 <- EUtilsSummary(("Biomedical Research"[MeSH Terms] OR ("Medical Informatics"[MeSH Terms] OR ("Automation, Laboratory"[MeSH Terms]) AND ("Information Systems"[MeSH Terms] OR ("Laboratory Information Systems"[MeSH Terms] OR ("Clinical laboratory information systems"[MeSH Terms] OR ("Hospital Information Systems"[MeSH Terms] OR ("Information Storage and Retrieval"[MeSH Terms]) AND ("Data Management"[MeSH Terms] OR ("Information Management"[MeSH Terms] OR ("Health Information Management"[MeSH Terms] OR ("Datasets as Topic"[MeSH Terms])) AND 1946[PDAT] : 2021[PDAT]
+summary(search_query8)
+
+
